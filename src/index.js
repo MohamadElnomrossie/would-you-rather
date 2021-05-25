@@ -10,7 +10,7 @@ import {createStore,compose} from 'redux'
 import reducer from "./reducers"
 import middleware from "./middleware"
 import {BrowserRouter} from 'react-router-dom'
-const store=createStore(reducer,compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__&&window.__REDUX_DEVTOOLS_EXTENSION__()))
+const store=createStore(reducer,middleware)
 ReactDOM.render(
   <BrowserRouter>
   <Provider store={store}>
