@@ -27,3 +27,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### usernames
 sarahedo, johndoe, tylermcginnis
+
+It is an application for playing would you rather.
+
+you need to login using the usernames mentioned above
