@@ -7,7 +7,6 @@ export default function logout(state={},action){
                 ...state,
                 login:{},
             }
-            break;
     
         default:
             return state;

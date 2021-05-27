@@ -6,6 +6,7 @@ import logout from "./logout"
 import answerQuestion from "./answerQuestion"
 import getMyQuestions from "./getMyQuestions"
 import newQuestion from "./newQuestion"
+import voteForAnswer from "./vote"
 export default combineReducers({
     questions,
     users,
@@ -13,5 +14,6 @@ export default combineReducers({
     answerQuestion,
     getMyQuestions,
     newQuestion,
-    logout
+    logout,
+    voteForAnswer
 })

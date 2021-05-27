@@ -1,7 +1,6 @@
 import * as types from "../actions/types"
-import vote from "../actions/vote"
-import _saveQuestionAnswer from "../utils/_DATA"
-export default function vote(state={},action){
+import {_saveQuestionAnswer} from "../utils/_DATA"
+export default function voteForAnswer(state={},action){
 switch (action.type) {
     case types.VOTE:
         _saveQuestionAnswer({authedUser:action.userID,
@@ -14,8 +13,6 @@ switch (action.type) {
             option:action.option,
             userID:action.userID
         }
-        break;
-
     default:
         return state;
 }

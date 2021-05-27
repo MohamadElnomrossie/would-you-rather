@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom"
 class NotFound extends Component{
-    componentDidMount(){
-        console.log(this.props)
-    }
     render()
    { return ( 
         <div className='container-fluid p-0'>
@@ -14,7 +11,5 @@ class NotFound extends Component{
         </div>
      );}
 }
-function mapStateToProps(state){
-    return state
-}
+
 export default NotFound

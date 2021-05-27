@@ -3,12 +3,7 @@ import { connect } from "react-redux";
 import Card from "./card";
 import getMyQuestions from "../actions/getMyQuestions";
 import Navbar from "./navbar";
-import {Redirect} from 'react-router-dom'
-
 class Dashboard extends Component {
-  // if (this.props.questions !== undefined ||Object.entries(this.props.questions).length <= 1 ||
-  //   this.props.questions !== {}) {
-    // try {
       quest=()=>Object.values(this.props.questions).filter(e=>{
         return (e.optionOne.votes.includes(this.props.login.login)||e.optionTwo.votes.includes(this.props.login.login))
       })
@@ -18,27 +13,12 @@ class Dashboard extends Component {
      get=()=>{
        this.props.getMy(getMyQuestions(this.props.login.login, this.quest(),this.other()));
      }
-     leaderBoard=()=>{
-       let c=Object.values(this.props.questions).sort((a,b)=>{
-        return (a.optionOne.votes.length+a.optionOne.votes.length)-(b.optionOne.votes.length+b.optionOne.votes.length)
-       })
-       return c
-     }
-     checkUser=()=>{
-      if (this.props.login.login===undefined){
-        return true
-      }
-      else{
-        return false
-      } }
  
   componentDidMount() {this.get()
 }
   render() {
     return (
       <div className="container-fluid px-0">
-        {this.checkUser()===true && (<Redirect to="/login"></Redirect>)}
-        {this.checkUser()===false&& <Redirect to="/"></Redirect>}
         <Navbar history={this.props.history} />
         <div className="col-6 mx-auto">
         <ul className="nav nav-tabs" id="myTab" role="tablist">

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
-import * as types from "../actions/types"
 import {Redirect} from "react-router-dom"
 import login from "../actions/login"
 class LoginForm extends Component{

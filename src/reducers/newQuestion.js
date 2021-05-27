@@ -14,7 +14,6 @@ export default function newQuestion(state={},action){
             }
       
     })
-    break
         default:
             return state
         }

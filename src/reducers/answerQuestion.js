@@ -3,15 +3,13 @@ import * as types from "../actions/types"
 export default function answerQuestion(state={},action){
     switch (action.type) {
         case types.ANSWER_QUESTION:
-            let {authedUser,qid,answer}=action
-
+            let {authedUser,qid,option}=action
             return{
             ...state,
-            qid,
             authedUser,
-            answer   
+            qid,
+            option
             }
-    
         default:
             return state;
     }

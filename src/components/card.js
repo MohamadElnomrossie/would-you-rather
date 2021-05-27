@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as types from "../actions/types"
 import {connect} from 'react-redux'
+import voteForAnswer from "../actions/vote"
 class Card extends Component{
    formateDate=(date)=>{
        let m=new Date(date)
@@ -13,7 +14,7 @@ class Card extends Component{
    }
    vote=(e)=>{
     if(this.props.vote===true){
-        this.props.dispatch({type:types.VOTE,questionID:e.target.id,option:e.target.name,userID:this.props.login.login})
+        this.props.AnswerVote({type:types.ANSWER_QUESTION,qid:e.target.id,option:e.target.name,authedUser:this.props.login.login})
     }
    }
     render(){
@@ -28,23 +29,22 @@ class Card extends Component{
             return questions.map(entry=>
                 <div className="card col-12 m-2" key={entry.id} id={entry.id} onClick={(e)=>this.handleClick(e)}>
                         <div id={entry.id} className="card-body">
-                            
                             <img className="avatar ms-2" id={entry.id} src={this.props.users[entry.author].avatarURL} alt={entry.name}></img>
                             <p className='text-muted fs-6 d-inline'>{this.props.users[entry.author].name}</p>
                             {this.props.displayStats!==true&&(
                             <div id={entry.id}>
                             <div className="" id={entry.id}>
-                            {this.props.vote!==true&&(<div className="form-check" id={entry.id}>
-                                    <input id={entry.id} disabled className="form-check-input" type='radio' id='optionOne' onChange={()=>{}} checked={entry.optionOne.votes.includes(this.props.login.login)}/>
-                                    <label id={entry.id} className="form-check-label" htmlFor="#optionOne" >{entry.optionOne.text}</label><br />
-                                    <input id={entry.id} disabled className="form-check-input" type='radio' id='optionOne' onChange={()=>{}} checked={entry.optionTwo.votes.includes(this.props.login.login)}/>
-                                    <label id={entry.id} className="form-check-label" htmlFor="#optionOne"  >{entry.optionTwo.text}</label>
+                            {this.props.vote===false&&(<div className="form-check" id={entry.id}>
+                                    <input disabled className="form-check-input" type='radio' id='optionOne' onChange={()=>{}} checked={entry.optionOne.votes.includes(this.props.login.login)}/>
+                                    <label id={entry.id} className="form-check-label" htmlFor="optionOne" >{entry.optionOne.text}</label><br />
+                                    <input disabled className="form-check-input" type='radio' id='optionTwo' onChange={()=>{}} checked={entry.optionTwo.votes.includes(this.props.login.login)}/>
+                                    <label id={entry.id} className="form-check-label" htmlFor="optionTwo"  >{entry.optionTwo.text}</label>
                                 </div>)}
                             {this.props.vote===true&&(
                                 <div>
-                                    <button onClick={this.vote} name='optionOne' disabled={entry.optionOne.votes.includes(this.props.login.login)} className="btn btn-primary col-12 m-2 align-middle" style={{height:80,"verticalAlign": "middle"}}>{entry.optionOne.text}</button>
+                                    <button onClick={(e)=>this.vote(e)} name='optionOne' id={entry.id} className="btn btn-primary col-12 m-2 align-middle">{entry.optionOne.text}</button>
                                     <br />
-                                    <button name='optionTwo' id={entry.id} disabled={entry.optionTwo.votes.includes(this.props.login.login)} className="btn btn-primary m-2 col-12 align-middle" style={{height:80}}>{entry.optionTwo.text}</button>                               
+                                    <button onClick={(e)=>this.vote(e)} name='optionTwo' id={entry.id} className="btn btn-primary m-2 col-12 align-middle" >{entry.optionTwo.text}</button>                               
                                 </div>
                             )}   
                             </div>
@@ -95,7 +95,7 @@ function mapStateToProps(state){
   }
   function mapDispatchToProps(dispatch){
       return{
-          vote: (dict)=>dispatch(dict)
+          AnswerVote: (dict)=>dispatch(dict)
       }
   }
-  export default connect(mapStateToProps)(Card)
+  export default connect(mapStateToProps,mapDispatchToProps)(Card)

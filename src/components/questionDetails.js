@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Navbar from "./navbar";
 import Card from "./card";
-import {Link,Redirect} from "react-router-dom"
+import {Link} from "react-router-dom"
 class QuestionDetails extends Component {
   getData = () => {
     let { author, optionOne, optionTwo, timestamp } = Object.values(
@@ -17,23 +17,14 @@ class QuestionDetails extends Component {
       author,
       optionOne,
       optionTwo,
-      author,
       timestamp,
       name,
       avatarURL,
     };
   };
-  checkUser=()=>{
-    if (this.props.login.login===undefined){
-      return true
-    }
-    else{
-      return false
-    } }
   render() {
     return (
       <div className="container-fluid px-0">
-        {this.checkUser()===true && (<Redirect to="/login"></Redirect>)}
           <Navbar/>
         <div className="col-8 mx-auto">
         <Card

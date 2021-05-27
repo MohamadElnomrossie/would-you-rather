@@ -8,6 +8,7 @@ import QuestionDetails from "./components/questionDetails";
 import {Redirect, Route,Switch } from "react-router-dom";
 import NewQuestion from './components/newQuestion'
 import NotFound from "./components/notfound"
+import ProtectedRoute from "./components/protectedRoute"
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(initialData());
@@ -24,18 +25,17 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/leaderboard" component={LeaderBoard}></Route>
-        <Route path="/questions/:id" component={QuestionDetails}></Route>
-        <Route path="/login" component={LoginForm}></Route>
-        <Route path="/newquestion" component={NewQuestion}></Route>
+        <ProtectedRoute exact path="/leaderboard" component={LeaderBoard}/>
+        <ProtectedRoute exact path="/questions/:id" component={QuestionDetails}></ProtectedRoute>
+        <ProtectedRoute path="/add" component={NewQuestion}></ProtectedRoute>
         <Route path="/notfound"component={NotFound}></Route>
-        <Route exact path="/" component={Dashboard}></Route>
+        <Route path="/login" component={LoginForm}></Route>
+        <ProtectedRoute exact path="/dashboard" component={Dashboard}></ProtectedRoute>
+        <Redirect from="/" to="/dashboard"></Redirect>
         <Redirect to="/notfound" />
       </Switch>
     );
   }
 }
-function mapStateToProps(state) {
-  return state;
-}
-export default connect(mapStateToProps)(App);
+
+export default connect()(App);

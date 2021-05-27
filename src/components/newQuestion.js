@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Navbar from "./navbar"
-import {Redirect} from "react-router-dom"
+import {Link} from "react-router-dom"
 import newQuestion from '../actions/newQuestion'
 class NewQuestion extends Component{
     state={optionOne:"",
 optionTwo:""}
-    checkUser=()=>{
-        if (this.props.login.login===undefined){
-          return true
-        }
-        else{
-          return false
-        } }
-
+ 
         handleSubmit=(e)=>{
             e.preventDefault()
             let optionOne=this.state.optionOne
@@ -24,15 +17,14 @@ optionTwo:""}
         handleChange=(e)=>{
             e.preventDefault()
             this.setState({[e.target.id]:e.target.value})
-            console.log(this.state)
         }
 render(){
     return(
         <div className="container-fluid p-0">
-            {this.checkUser()===true && (<Redirect to="/login"></Redirect>)}
             <Navbar/>
-            <div className="mx-auto col-6 mt-4">
-            <h1 calssName="mb-4">New Question</h1>
+        
+                <div className="mx-auto col-6 mt-4">
+            <h1 className="mb-4">New Question</h1>
             <form onSubmit={(e)=>this.handleSubmit(e)}>
                 <div className="mb-3">
                 <label htmlFor="optionOne" class="form-label">First Option</label>
@@ -44,8 +36,13 @@ render(){
                 </div>
             <button type="submit" className="btn btn-primary mx-auto">Save</button>
             </form>
-                
             </div>
+        
+            <div className='col-6 mx-auto'>
+                <h1>You must login first</h1>
+                <Link className='btn btn-primary' to="/login">Login</Link>
+                </div>
+        
         </div>
     )
 }

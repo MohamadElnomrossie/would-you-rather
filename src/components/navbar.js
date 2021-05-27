@@ -1,27 +1,19 @@
 import React, { Component } from "react";
 import logout from "../actions/logout"
 import { connect } from "react-redux";
-import {NavLink,Link} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 class Navbar extends Component {
+ 
   logout=()=>{
     this.props.logout()
-    this.props.history.push("/login")
   }
   render() {
-    const checkUser=()=>{
-      if (this.props.login.login!==undefined){
-        return true
-      }
-      else{
-        return false
-      }
-    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top ">
           <div className="container-fluid d-flex">
-            <a className="navbar-brand" href="#">
-              {checkUser()===true&&(this.props.users[this.props.login.login].name)}
-            </a>
+            <span className="navbar-brand" href="#">
+            {this.props.login.login&&this.props.users[this.props.login.login].name}
+            </span>
             <button
               className="navbar-toggler"
               type="button"
@@ -35,12 +27,10 @@ class Navbar extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav">
-                <Link className="nav-link me-0 " to="/">Dashboard</Link>
-                <Link className="nav-link me-0" to="/leaderboard">Leader Board</Link>
-                <Link className="nav-link me-0" to="/newquestion">New Question</Link>
-                <a className="nav-link me-0" onClick={this.logout}>
-                  Logout
-                </a>
+                <NavLink className="nav-link me-0 " to="/dashboard">Dashboard</NavLink>
+                <NavLink className="nav-link me-0" to="/leaderboard">Leader Board</NavLink>
+                <NavLink className="nav-link me-0" to="/add">New Question</NavLink>
+                <NavLink to="/login" className="nav-link me-0" onClick={this.logout}>Logout</NavLink>            
               </div>
             </div>
           </div>
