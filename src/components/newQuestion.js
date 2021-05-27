@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Navbar from "./navbar"
-import {Link} from "react-router-dom"
 import newQuestion from '../actions/newQuestion'
 class NewQuestion extends Component{
     state={optionOne:"",
@@ -37,12 +36,7 @@ render(){
             <button type="submit" className="btn btn-primary mx-auto">Save</button>
             </form>
             </div>
-        
-            <div className='col-6 mx-auto'>
-                <h1>You must login first</h1>
-                <Link className='btn btn-primary' to="/login">Login</Link>
-                </div>
-        
+               
         </div>
     )
 }

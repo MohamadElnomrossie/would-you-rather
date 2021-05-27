@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import * as types from "../actions/types"
 import {connect} from 'react-redux'
-import voteForAnswer from "../actions/vote"
 class Card extends Component{
    formateDate=(date)=>{
        let m=new Date(date)
@@ -30,13 +29,14 @@ class Card extends Component{
                 <div className="card col-12 m-2" key={entry.id} id={entry.id} onClick={(e)=>this.handleClick(e)}>
                         <div id={entry.id} className="card-body">
                             <img className="avatar ms-2" id={entry.id} src={this.props.users[entry.author].avatarURL} alt={entry.name}></img>
-                            <p className='text-muted fs-6 d-inline'>{this.props.users[entry.author].name}</p>
+                            <p className='text-muted fs-6 d-inline'>Author: {this.props.users[entry.author].name}</p>
                             {this.props.displayStats!==true&&(
                             <div id={entry.id}>
                             <div className="" id={entry.id}>
                             {this.props.vote===false&&(<div className="form-check" id={entry.id}>
                                     <input disabled className="form-check-input" type='radio' id='optionOne' onChange={()=>{}} checked={entry.optionOne.votes.includes(this.props.login.login)}/>
-                                    <label id={entry.id} className="form-check-label" htmlFor="optionOne" >{entry.optionOne.text}</label><br />
+                                    <label id={entry.id} className="form-check-label" htmlFor="optionOne" >{entry.optionOne.text}</label>
+                                    <br />
                                     <input disabled className="form-check-input" type='radio' id='optionTwo' onChange={()=>{}} checked={entry.optionTwo.votes.includes(this.props.login.login)}/>
                                     <label id={entry.id} className="form-check-label" htmlFor="optionTwo"  >{entry.optionTwo.text}</label>
                                 </div>)}

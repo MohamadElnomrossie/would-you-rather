@@ -23,17 +23,21 @@ class Dashboard extends Component {
         <div className="col-6 mx-auto">
         <ul className="nav nav-tabs" id="myTab" role="tablist">
   <li className="nav-item" role="presentation">
-    <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Answered Questions</button>
+    <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Unanswered Questions</button>
   </li>
   <li className="nav-item" role="presentation">
-    <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Unanswered questions</button>
+    <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">My answered questions</button>
   </li>  
 </ul>
 <div className="tab-content" id="myTabContent">
   <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <h1>Answered Questions</h1><Card target={this.props.getMyQuestions.answered}  history={this.props.history}/> </div>
+  <h1>Unnswered Questions</h1>
+  <Card target={this.props.getMyQuestions.unanswered}  history={this.props.history} vote={true}/>
+    </div>
   <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-  <h1>Unnswered Questions</h1><Card target={this.props.getMyQuestions.unanswered}  history={this.props.history} vote={true}/></div><div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><Card target={this.props.getMyQuestions.unanswered} /></div>
+    <h1>Answered Questions</h1>
+    <Card target={this.props.getMyQuestions.answered}  history={this.props.history} vote={false}/> 
+  </div>
 </div>
       </div>
 </div>

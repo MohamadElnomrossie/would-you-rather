@@ -4,9 +4,14 @@ import {Redirect} from "react-router-dom"
 import login from "../actions/login"
 class LoginForm extends Component{
 state={username:""}
+history=""
  handleChange=(e)=>{
      e.preventDefault()
      this.setState({username:e.target.value})
+     
+ }
+ componentDidMount(){
+   console.log(this.props)
  }
  
  login=(e)=>{
@@ -14,9 +19,12 @@ state={username:""}
      let user=this.props.users[this.state.username]
      if(user!==undefined){
           this.props.login(login(this.state.username))
-            this.props.history.push("/")
+          if(this.props.location.state.from.pathname!==undefined){
+            this.props.history.push(this.props.location.state.from.pathname)
+        }
+      }      
           }          
-      }
+      
 render(){
     return(
         <div>

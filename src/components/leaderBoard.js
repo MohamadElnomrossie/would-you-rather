@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import {connect} from "react-redux"
 import Card from "./card";
 import Navbar from  "./navbar"
-import {Link} from "react-router-dom"
 class LeaderBoard extends Component{
     leaderBoard=()=>{
         let c=Object.values(this.props.questions).sort((a,b)=>{
@@ -30,10 +29,7 @@ class LeaderBoard extends Component{
         history={this.props.history}/>  
          </div>
 
-             <div className='col-6 mx-auto'>
-             <h1>You must login first</h1>
-             <Link className='btn btn-primary' to="/login">Login</Link>
-             </div>
+            
      </div>
  )}
 }

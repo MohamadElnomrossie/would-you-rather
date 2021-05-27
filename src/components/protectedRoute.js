@@ -1,22 +1,25 @@
-import {Route,Link} from 'react-router-dom'
+import {Route,Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-const ProtectedRoute = ({component:Component,login,...rest}) => {
-  if (login){
-
-      return (  
+const ProtectedRoute = ({component:Component,login,location,...rest}) => {
+        return (  
           <Route {...rest} render={(props)=>{
-              return <Component {...props}/>
+              if (login)
+              {return <Component from={props.location} {...props}/>}
+              else{
+                return (
+                    <Redirect to={
+                        {pathname:"/login",
+                     state:{
+                         from:props.location
+                     }}
+             
+                    }></Redirect>
+                   )
+              }
           }} />
       );
-  }
-  else{
-      return (
-        <div className='col-6 mx-auto'>
-        <h1>You must login first</h1>
-        <Link className='btn btn-primary' to="/login">Login</Link>
-        </div>
-      )
-  }
+  
+  
 }
 function mapStateToProps (state){
     const {login}=state.login
