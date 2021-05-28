@@ -13,6 +13,12 @@ class Dashboard extends Component {
      get=()=>{
        this.props.getMy(getMyQuestions(this.props.login.login, this.quest(),this.other()));
      }
+  answer=(e)=>{
+    let question=this.props.questions[e.id]
+    let myQuestions= Object.values(this.props.getMyQuestions.answered).push(question)
+    let OtherQuestions=Object.values(this.props.getMyQuestions.unanswered).pop(question)
+   this.props.getMy(getMyQuestions(this.props.login.login, myQuestions,OtherQuestions));
+ }
  
   componentDidMount() {this.get()
 }
@@ -32,6 +38,9 @@ class Dashboard extends Component {
 <div className="tab-content" id="myTabContent">
   <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
   <h1>Unnswered Questions</h1>
+  {Object.entries(this.props.newQuestion).length>=1&&
+  <Card target={this.props.newQuestion}  history={this.props.history} vote={true}/>
+  }
   <Card target={this.props.getMyQuestions.unanswered}  history={this.props.history} vote={true}/>
     </div>
   <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

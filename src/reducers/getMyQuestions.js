@@ -5,7 +5,7 @@ export default function getMyQuestions(state={},action){
             return{
                 ...state,
                 answered:{...action.qids},
-                 unanswered:{...action.otherQuestions}
+                unanswered:{...action.otherQuestions}
             }    
         default:
             return state;

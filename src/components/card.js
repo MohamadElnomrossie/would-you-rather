@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as types from "../actions/types"
 import {connect} from 'react-redux'
+import voteForAnswer from "../actions/vote"
 class Card extends Component{
    formateDate=(date)=>{
        let m=new Date(date)
@@ -14,7 +15,11 @@ class Card extends Component{
    vote=(e)=>{
     if(this.props.vote===true){
         this.props.AnswerVote({type:types.ANSWER_QUESTION,qid:e.target.id,option:e.target.name,authedUser:this.props.login.login})
+        this.props.questions[e.target.id][e.target.name].votes.push(this.props.login.login)
     }
+   }
+   componentDidMount(){
+       console.log(this.props)
    }
     render(){
             const questions=()=>{
@@ -26,6 +31,7 @@ class Card extends Component{
                 return b.timestamp-a.timestamp
             })
             return questions.map(entry=>
+                
                 <div className="card col-12 m-2" key={entry.id} id={entry.id} onClick={(e)=>this.handleClick(e)}>
                         <div id={entry.id} className="card-body">
                             <img className="avatar ms-2" id={entry.id} src={this.props.users[entry.author].avatarURL} alt={entry.name}></img>
@@ -35,14 +41,14 @@ class Card extends Component{
                             <div className="" id={entry.id}>
                             {this.props.vote===false&&(<div className="form-check" id={entry.id}>
                                     <input disabled className="form-check-input" type='radio' id='optionOne' onChange={()=>{}} checked={entry.optionOne.votes.includes(this.props.login.login)}/>
-                                    <label id={entry.id} className="form-check-label" htmlFor="optionOne" >{entry.optionOne.text}</label>
-                                    <br />
+                                    <label id={entry.id} className="form-check-label" htmlFor="optionOne" >{entry.optionOne.text}</label><br />
                                     <input disabled className="form-check-input" type='radio' id='optionTwo' onChange={()=>{}} checked={entry.optionTwo.votes.includes(this.props.login.login)}/>
                                     <label id={entry.id} className="form-check-label" htmlFor="optionTwo"  >{entry.optionTwo.text}</label>
                                 </div>)}
                             {this.props.vote===true&&(
                                 <div>
-                                    <button onClick={(e)=>this.vote(e)} name='optionOne' id={entry.id} className="btn btn-primary col-12 m-2 align-middle">{entry.optionOne.text}</button>
+                                    <button onClick={(e)=>this.vote(e)
+                                    } name='optionOne' id={entry.id} className="btn btn-primary col-12 m-2 align-middle">{entry.optionOne.text}</button>
                                     <br />
                                     <button onClick={(e)=>this.vote(e)} name='optionTwo' id={entry.id} className="btn btn-primary m-2 col-12 align-middle" >{entry.optionTwo.text}</button>                               
                                 </div>
@@ -91,6 +97,7 @@ class Card extends Component{
     }
 }
 function mapStateToProps(state){
+
     return state
   }
   function mapDispatchToProps(dispatch){
