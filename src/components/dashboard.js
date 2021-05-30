@@ -38,9 +38,9 @@ class Dashboard extends Component {
 <div className="tab-content" id="myTabContent">
   <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
   <h1>Unnswered Questions</h1>
-  {Object.entries(this.props.newQuestion).length>=1&&
+  {/* {Object.entries(this.props.newQuestion).length>=1&&
   <Card target={this.props.newQuestion}  history={this.props.history} vote={true}/>
-  }
+  } */}
   <Card target={this.props.getMyQuestions.unanswered}  history={this.props.history} vote={true}/>
     </div>
   <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

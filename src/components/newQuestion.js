@@ -2,22 +2,25 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Navbar from "./navbar"
 import * as quest from '../actions/newQuestion'
+
 class NewQuestion extends Component{
     state={optionOne:"",
 optionTwo:""}
- componentDidMount(){
-    
- }
+
         handleSubmit= (e)=>{
             e.preventDefault()
             let optionOneText=this.state.optionOne
             let optionTwoText=this.state.optionTwo
             let author=this.props.login.login
             this.props.saveQuestion(quest.handleNewQuestion(author,optionOneText,optionTwoText))
-            let id=Object.keys(this.props.newQuestion)[0]
-            if (id)
-            {this.props.questions[id]=Object.values(this.props.newQuestion)[0]}
-            this.props.history.push("/")
+            setTimeout(()=>{
+                let id=Object.keys(this.props.newQuestion).slice(-1)[0]
+                if (this.props.newQuestion)
+                {this.props.questions[id]=Object.values(this.props.newQuestion).slice(-1)[0]       
+            }
+                this.props.history.push("/")
+            },1000)
+           
            
         }
         handleChange=(e)=>{
@@ -53,7 +56,8 @@ function mapStateToProps(state){
 }
 function mapDispatchToProps(dispatch) {
     return{
-        saveQuestion:(dict)=>dispatch(dict)
+        saveQuestion:(dict)=>dispatch(dict),
+        getMy: (dict) => dispatch(dict)
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(NewQuestion)

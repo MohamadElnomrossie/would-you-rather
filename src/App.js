@@ -26,12 +26,13 @@ class App extends Component {
     return (
       <Switch>
         <ProtectedRoute exact path="/leaderboard" component={LeaderBoard}/>
-        <ProtectedRoute exact path="/questions/:id" component={QuestionDetails}></ProtectedRoute>
+        <ProtectedRoute path="/questions/:id" component={QuestionDetails}></ProtectedRoute>
         <ProtectedRoute path="/add" component={NewQuestion}></ProtectedRoute>
-        <Route path="/notfound"component={NotFound}></Route>
-        <Route path="/login" component={LoginForm}></Route>
         <ProtectedRoute exact path="/dashboard" component={Dashboard}></ProtectedRoute>
+        <Route exact path="/login" component={LoginForm}></Route>
         <Redirect from="/" to="/dashboard"></Redirect>
+        <ProtectedRoute path="/notfound"component={NotFound}></ProtectedRoute>
+        <Route path="*" component={NotFound}></Route>
         <Redirect to="/notfound" />
       </Switch>
     );

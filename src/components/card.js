@@ -35,7 +35,7 @@ class Card extends Component{
                 <div className="card col-12 m-2" key={entry.id} id={entry.id} onClick={(e)=>this.handleClick(e)}>
                         <div id={entry.id} className="card-body">
                             <img className="avatar ms-2" id={entry.id} src={this.props.users[entry.author].avatarURL} alt={entry.name}></img>
-                            <p className='text-muted fs-6 d-inline'>Author: {this.props.users[entry.author].name}</p>
+                            <p id={entry.id} className='text-muted fs-6 d-inline'>Author: {this.props.users[entry.author].name}</p>
                             {this.props.displayStats!==true&&(
                             <div id={entry.id}>
                             <div className="" id={entry.id}>
