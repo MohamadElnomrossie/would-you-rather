@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
-import {Redirect} from "react-router-dom"
 import login from "../actions/login"
 class LoginForm extends Component{
 state={username:""}
@@ -10,14 +9,13 @@ history=""
      this.setState({username:e.target.value})
      
  }
- componentDidMount(){
-   console.log(this.props)
- }
+
  
  login=(e)=>{
      e.preventDefault()
      let user=this.props.users[this.state.username]
-     if(user!==undefined){
+     if(user){
+
           this.props.login(login(this.state.username))
           if(this.props.location.state){
             this.props.history.push(this.props.location.state.from.pathname)
@@ -39,7 +37,6 @@ render(){
             <form onSubmit={(e)=>this.login(e)} className="mx-2" >
                 <div className="input-group mb-3">
                     {/* <input type="text" value={this.state.username} onChange={(e)=>this.handleChange(e)} className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2"/> */}
-                   
                     <select className="form-select" defaultValue='none' onChange={(e)=>this.handleChange(e)} aria-label="Default select example">
                     <option disabled value="none">Select a username</option>
                         {this.users().map((entry)=>
@@ -51,8 +48,7 @@ render(){
             </form>
         </div>
             )}
-        {this.props.login.login &&(
-            <Redirect to="/"></Redirect>)}
+        
                 </div>
             )
 }

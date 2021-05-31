@@ -16,7 +16,8 @@ optionTwo:""}
             setTimeout(()=>{
                 let id=Object.keys(this.props.newQuestion).slice(-1)[0]
                 if (this.props.newQuestion)
-                {this.props.questions[id]=Object.values(this.props.newQuestion).slice(-1)[0]       
+                {this.props.questions[id]=Object.values(this.props.newQuestion).slice(-1)[0]
+                this.props.users[author].questions.push(id)       
             }
                 this.props.history.push("/")
             },1000)

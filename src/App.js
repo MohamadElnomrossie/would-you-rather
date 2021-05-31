@@ -25,15 +25,15 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <ProtectedRoute exact path="/leaderboard" component={LeaderBoard}/>
+        <ProtectedRoute path="/leaderboard" component={LeaderBoard}/>
         <ProtectedRoute path="/questions/:id" component={QuestionDetails}></ProtectedRoute>
         <ProtectedRoute path="/add" component={NewQuestion}></ProtectedRoute>
         <ProtectedRoute exact path="/dashboard" component={Dashboard}></ProtectedRoute>
         <Route exact path="/login" component={LoginForm}></Route>
-        <Redirect from="/" to="/dashboard"></Redirect>
         <ProtectedRoute path="/notfound"component={NotFound}></ProtectedRoute>
-        <Route path="*" component={NotFound}></Route>
+        <ProtectedRoute path="*" component={NotFound}></ProtectedRoute>
         <Redirect to="/notfound" />
+        <Redirect from="/" to="/dashboard"></Redirect>
       </Switch>
     );
   }

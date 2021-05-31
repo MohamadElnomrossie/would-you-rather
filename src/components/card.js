@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import * as types from "../actions/types"
 import {connect} from 'react-redux'
-import voteForAnswer from "../actions/vote"
 class Card extends Component{
    formateDate=(date)=>{
        let m=new Date(date)
@@ -9,17 +8,17 @@ class Card extends Component{
    }
    handleClick=(e)=>{
        let id=e.target.id
-     
-   this.props.history.push(`/questions/${id}`)
+     if(id.trim()!==""){
+         this.props.history.push(`/questions/${id}`)
+     }
    }
    vote=(e)=>{
     if(this.props.vote===true){
         this.props.AnswerVote({type:types.ANSWER_QUESTION,qid:e.target.id,option:e.target.name,authedUser:this.props.login.login})
         this.props.questions[e.target.id][e.target.name].votes.push(this.props.login.login)
+        this.props.users[this.props.login.login]['answers'][e.target.id]=[e.target.name]
+        
     }
-   }
-   componentDidMount(){
-       console.log(this.props)
    }
     render(){
             const questions=()=>{

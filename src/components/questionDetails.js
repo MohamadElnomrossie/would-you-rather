@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Navbar from "./navbar";
 import Card from "./card";
-import {Redirect} from 'react-router-dom'
+import NotFound from "./notfound"
 class QuestionDetails extends Component {
   
   getQuestion=()=>{
@@ -10,7 +10,7 @@ class QuestionDetails extends Component {
       return e.id === this.props.match.params.id;
   })
   if (question.length<1){
-    return (<Redirect to="/notfound"/>)
+    return (<NotFound></NotFound>)
   }
   else{
     return (<Card
